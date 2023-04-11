@@ -56,7 +56,10 @@ def api_list_attendees(request, conference_vo_id=None):
     }
     """
     if request.method == "GET":
-        attendees = Attendee.objects.filter(conference=conference_vo_id)
+        if conference_vo_id is not None:
+            attendees = Attendee.objects.filter(conference=conference_vo_id)
+        else:
+            attendees = Attendee.objects.all()
         return JsonResponse(
             {"attendees": attendees},
             encoder=AttendeeListEncoder,
