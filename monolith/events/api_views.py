@@ -52,6 +52,16 @@ class ConferenceDetailEncoder(ModelEncoder):
         "location": LocationListEncoder(),
     }
 
+@require_http_methods(["GET"])
+def api_list_states(request):
+    # Get the states from the database ordered by name
+    states = State.objects.all().order_by("name")
+    # Create an empty list named state_list
+    state_list = []
+    for state in states:
+        d = {state.name: state.abbreviation}
+        state_list.append(d)
+    return JsonResponse({"states": state_list})
 
 @require_http_methods(["GET", "POST"])
 def api_list_conferences(request):
@@ -139,24 +149,6 @@ def api_show_conference(request, pk):
 
 @require_http_methods(["GET", "POST"])
 def api_list_locations(request):
-    """
-    Lists the location names and the link to the location.
-
-    Returns a dictionary with a single key "locations" which
-    is a list of location names and URLS. Each entry in the list
-    is a dictionary that contains the name of the location and
-    the link to the location's information.
-
-    {
-        "locations": [
-            {
-                "name": location's name,
-                "href": URL to the location,
-            },
-            ...
-        ]
-    }
-    """
     if request.method == "GET":
         locations = Location.objects.all()
         return JsonResponse(
