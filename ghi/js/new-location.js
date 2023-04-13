@@ -15,7 +15,7 @@ window.addEventListener('DOMContentLoaded', async () => {
             }
         }
     }catch (error){
-        console.error("Jeepers mister, something broke!", error)
+        console.error("Jeepers miss, something broke!", error)
     }
 
 
@@ -36,7 +36,7 @@ window.addEventListener('DOMContentLoaded', async () => {
         }
     }
 
-    const response = await fetch(locationUrl, fetchConfig);
+    const response = fetch(locationUrl, fetchConfig);
     if (response.ok) {
         locationForm.reset();
         const newLocation = await response.json();
