@@ -18,8 +18,6 @@ window.addEventListener('DOMContentLoaded', async () => {
         console.error("Jeepers miss, something broke!", error)
     }
 
-
-
     const locationForm = document.getElementById("create-location-form");
     locationForm.addEventListener('submit', async (e) => {
         e.preventDefault();
@@ -46,6 +44,5 @@ window.addEventListener('DOMContentLoaded', async () => {
         const error = await response.text();
         console.error("Error response from server:", error);
     }
-
   });
 });
