@@ -60,7 +60,8 @@ def api_list_states(request):
     # Create an empty list named state_list
     state_list = []
     for state in states:
-        d = {state.name: state.abbreviation}
+        d = {"name": state.name,
+             "abbreviation": state.abbreviation}
         state_list.append(d)
     return JsonResponse({"states": state_list})
 
